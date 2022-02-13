@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import ContactModel
+
+
+@admin.register(ContactModel)
+class ContactModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+    list_display_links = ['id', 'name']
