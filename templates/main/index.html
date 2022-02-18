@@ -6,49 +6,32 @@
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
-            <div class="hero__items set-bg" data-setbg="{% static 'img/hero/hero-' %}1.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-8">
-                            <div class="hero__text">
-                                <h6>Summer Collection</h6>
-                                <h2>Fall - Winter Collections 2030</h2>
-                                <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
-                                <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                                <div class="hero__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
+            {% for banner in banners %}
+                <div class="hero__items set-bg" data-setbg="{{ banner.banner.url }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-7 col-md-8">
+                                <div class="hero__text">
+                                    <h6>{{ banner.collection }}</h6>
+                                    <h2>{{ banner.title }}</h2>
+                                    <p>
+                                        {{ banner.description }}
+                                    </p>
+                                    <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                                    <div class="hero__social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="hero__items set-bg" data-setbg="{% static 'img/hero/hero-' %}2.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-8">
-                            <div class="hero__text">
-                                <h6>Summer Collection</h6>
-                                <h2>Fall - Winter Collections 2030</h2>
-                                <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
-                                <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                                <div class="hero__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
+
     </section>
     <!-- Hero Section End -->
 
@@ -113,7 +96,8 @@
                             <span class="label">New</span>
                             <ul class="product__hover">
                                 <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a></li>
-                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
+                                    <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'img/icon/search.png' %}" alt=""></a></li>
                             </ul>
                         </div>
@@ -147,7 +131,8 @@
                         <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-' %}2.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a></li>
-                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
+                                    <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'img/icon/search.png' %}" alt=""></a></li>
                             </ul>
                         </div>
@@ -182,7 +167,8 @@
                             <span class="label">Sale</span>
                             <ul class="product__hover">
                                 <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a></li>
-                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
+                                    <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'img/icon/search.png' %}" alt=""></a></li>
                             </ul>
                         </div>
@@ -216,7 +202,8 @@
                         <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-' %}4.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a></li>
-                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
+                                    <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'img/icon/search.png' %}" alt=""></a></li>
                             </ul>
                         </div>
@@ -250,7 +237,8 @@
                         <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-' %}5.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a></li>
-                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
+                                    <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'img/icon/search.png' %}" alt=""></a></li>
                             </ul>
                         </div>
@@ -285,7 +273,8 @@
                             <span class="label">Sale</span>
                             <ul class="product__hover">
                                 <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a></li>
-                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
+                                    <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'img/icon/search.png' %}" alt=""></a></li>
                             </ul>
                         </div>
@@ -319,7 +308,8 @@
                         <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-' %}7.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a></li>
-                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
+                                    <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'img/icon/search.png' %}" alt=""></a></li>
                             </ul>
                         </div>
@@ -353,7 +343,8 @@
                         <div class="product__item__pic set-bg" data-setbg="{% static 'img/product/product-' %}8.jpg">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a></li>
-                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
+                                    <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'img/icon/search.png' %}" alt=""></a></li>
                             </ul>
                         </div>
@@ -393,7 +384,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="categories__text">
-                        <h2>Clothings Hot <br /> <span>Shoe Collection</span> <br /> Accessories</h2>
+                        <h2>Clothings Hot <br/> <span>Shoe Collection</span> <br/> Accessories</h2>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -441,19 +432,25 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="instagram__pic">
-                        <div class="instagram__pic__item set-bg" data-setbg="{% static 'img/instagram/instagram-' %}1.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{% static 'img/instagram/instagram-' %}2.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{% static 'img/instagram/instagram-' %}3.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{% static 'img/instagram/instagram-' %}4.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{% static 'img/instagram/instagram-' %}5.jpg"></div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{% static 'img/instagram/instagram-' %}6.jpg"></div>
+                        <div class="instagram__pic__item set-bg"
+                             data-setbg="{% static 'img/instagram/instagram-' %}1.jpg"></div>
+                        <div class="instagram__pic__item set-bg"
+                             data-setbg="{% static 'img/instagram/instagram-' %}2.jpg"></div>
+                        <div class="instagram__pic__item set-bg"
+                             data-setbg="{% static 'img/instagram/instagram-' %}3.jpg"></div>
+                        <div class="instagram__pic__item set-bg"
+                             data-setbg="{% static 'img/instagram/instagram-' %}4.jpg"></div>
+                        <div class="instagram__pic__item set-bg"
+                             data-setbg="{% static 'img/instagram/instagram-' %}5.jpg"></div>
+                        <div class="instagram__pic__item set-bg"
+                             data-setbg="{% static 'img/instagram/instagram-' %}6.jpg"></div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="instagram__text">
                         <h2>Instagram</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+                            labore et dolore magna aliqua.</p>
                         <h3>#Male_Fashion</h3>
                     </div>
                 </div>
@@ -475,24 +472,24 @@
             </div>
             <div class="row">
                 {% for post in last_posts %}
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic set-bg" data-setbg="{{ post.main_image.url }}"></div>
-                        <div class="blog__item__text">
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="blog__item">
+                            <div class="blog__item__pic set-bg" data-setbg="{{ post.main_image.url }}"></div>
+                            <div class="blog__item__text">
                             <span><img src="{% static 'img/icon/calendar.png' %}" alt="">
                                 {{ post.created_at|date:'d F Y' }}
                             </span>
-                            <h5>
-                                {% if post.title|length > 50 %}
-                                    {{ post.title|truncatewords:'6' }}
-                                {% else %}
-                                    {{ post.title }}
-                                {% endif %}
-                            </h5>
-                            <a href="{% url 'blogs:blog_detail' pk=post.id %}">Read More</a>
+                                <h5>
+                                    {% if post.title|length > 50 %}
+                                        {{ post.title|truncatewords:'6' }}
+                                    {% else %}
+                                        {{ post.title }}
+                                    {% endif %}
+                                </h5>
+                                <a href="{% url 'blogs:blog_detail' pk=post.id %}">Read More</a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endfor %}
 
             </div>

@@ -37,11 +37,21 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="{% url 'pages:home' %}">Home</a></li>
-                            <li><a href="">Shop</a></li>
-                            <li><a href="{% url 'blogs:blog_list' %}">Blog</a></li>
-                            <li><a href="">About Us</a></li>
-                            <li><a href="{% url 'pages:contact' %}">Contacts</a></li>
+                            <li {% if request.path == '/' %}class="active"{% endif %}>
+                                <a href="{% url 'pages:home' %}">Home</a>
+                            </li>
+                            <li {% if request.path == '/shop/' %}class="active"{% endif %}>
+                                <a href="{% url 'shops:shop' %}">Shop</a>
+                            </li>
+                            <li {% if request.path == '/blog/' %}class="active"{% endif %}>
+                                <a href="{% url 'blogs:blog_list' %}">Blog</a>
+                            </li>
+                            <li {% if request.path == '/about/' %}class="active"{% endif %}>
+                                <a href="{% url 'pages:about' %}">About Us</a>
+                            </li>
+                            <li {% if request.path == '/contact/' %}class="active"{% endif %}>
+                                <a href="{% url 'pages:contact' %}">Contacts</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
