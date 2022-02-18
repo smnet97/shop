@@ -3,6 +3,18 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
+class BrandModel(models.Model):
+    name = models.CharField(max_length=255, verbose_name=_('name'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('brand')
+        verbose_name_plural = _('brands')
+
+
 class TagModel(models.Model):
     name = models.CharField(max_length=54, verbose_name=_('name'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
@@ -39,6 +51,14 @@ class ProductModel(models.Model):
         on_delete=models.PROTECT,
         related_name='products',
         verbose_name=_('category')
+    )
+    brand = models.ForeignKey(
+        BrandModel,
+        on_delete=models.PROTECT,
+        related_name='products',
+        verbose_name=_('brand'),
+        null=True,
+        blank=True
     )
     tag = models.ManyToManyField(
         TagModel,

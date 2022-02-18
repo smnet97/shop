@@ -1,6 +1,6 @@
 <div class="shop__sidebar__search">
-    <form action="#">
-        <input type="text" placeholder="Search...">
+    <form action="{% url 'shops:shop' %}">
+        <input value="{{ request.GET.q }}" name="q" type="text" placeholder="Search...">
         <button type="submit"><span class="icon_search"></span></button>
     </form>
 </div>
@@ -14,15 +14,9 @@
                 <div class="card-body">
                     <div class="shop__sidebar__categories">
                         <ul class="nice-scroll">
-                            <li><a href="#">Men (20)</a></li>
-                            <li><a href="#">Women (20)</a></li>
-                            <li><a href="#">Bags (20)</a></li>
-                            <li><a href="#">Clothing (20)</a></li>
-                            <li><a href="#">Shoes (20)</a></li>
-                            <li><a href="#">Accessories (20)</a></li>
-                            <li><a href="#">Kids (20)</a></li>
-                            <li><a href="#">Kids (20)</a></li>
-                            <li><a href="#">Kids (20)</a></li>
+                            {% for category in categories %}
+                                <li><a {% if request.GET.cat == category.pk|stringformat:'i' %} class="text-dark"{% endif %} href="?cat={{ category.pk }}">{{ category }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -36,10 +30,9 @@
                 <div class="card-body">
                     <div class="shop__sidebar__brand">
                         <ul>
-                            <li><a href="#">Louis Vuitton</a></li>
-                            <li><a href="#">Chanel</a></li>
-                            <li><a href="#">Hermes</a></li>
-                            <li><a href="#">Gucci</a></li>
+                            {% for b in brands %}
+                                <li><a {% if request.GET.brand == b.pk|stringformat:'i' %} class="text-dark"{% endif %} href="?brand={{ b.pk }}">{{ b }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -144,13 +137,14 @@
             <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
                 <div class="card-body">
                     <div class="shop__sidebar__tags">
-                        <a href="#">Product</a>
-                        <a href="#">Bags</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Fashio</a>
-                        <a href="#">Clothing</a>
-                        <a href="#">Hats</a>
-                        <a href="#">Accessories</a>
+                        {% for tag in tags %}
+                            <a
+                                    {% if request.GET.tag == tag.name %}style="background: #000; color: #fff;"{% endif %}
+                                    href="?tag={{ tag }}"
+                            >
+                                {{ tag }}
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__left">
-                                    <p>Showing 1–12 of 126 results</p>
+                                    <p>Showing {{ page_obj.start_index }}–{{ page_obj.end_index }} of {{ page_obj.paginator.count }} results</p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -58,7 +58,8 @@
                                             <span class="label">Sale</span>
                                         {% endif %}
                                         {% if object.is_new %}
-                                            <span style="background: white; color: #000;{% if object.is_discount %} margin-top: 2rem;{% endif %}" class="label">New</span>
+                                            <span style="background: white; color: #000;{% if object.is_discount %} margin-top: 2rem;{% endif %}"
+                                                  class="label">New</span>
                                         {% endif %}
                                         <ul class="product__hover">
                                             <li><a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a>
@@ -66,7 +67,8 @@
                                             <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
                                                 <span>Compare</span></a>
                                             </li>
-                                            <li><a href="{% url 'shops:product_detail' pk=object.pk %}"><img src="{% static 'img/icon/search.png' %}" alt=""></a>
+                                            <li><a href="{% url 'shops:product_detail' pk=object.pk %}"><img
+                                                    src="{% static 'img/icon/search.png' %}" alt=""></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -105,13 +107,23 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="product__pagination">
-                                <a class="active" href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <span>...</span>
-                                <a href="#">21</a>
-                            </div>
+
+                            {% if page_obj.paginator.count > 3 %}
+                                <section class="container mb-4 pb-5">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="product__pagination">
+                                                {% for page in page_obj.paginator.page_range %}
+                                                    <a {% if page == page_obj.number %}class="active"{% endif %}
+                                                       href="?page={{ page }}">
+                                                        {{ page }}
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

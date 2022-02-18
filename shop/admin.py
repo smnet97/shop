@@ -18,6 +18,13 @@ class CategoryModelAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+@admin.register(BrandModel)
+class BrandModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+    list_display_links = ['id', 'name']
+    search_fields = ['name']
+
+
 @admin.register(ProductModel)
 class ProductModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'price']
