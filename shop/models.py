@@ -3,6 +3,30 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
+class ColorModel(models.Model):
+    code = models.CharField(max_length=7, verbose_name=_("code"))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created at"))
+
+    def __str__(self):
+        return self.code
+
+    class Meta:
+        verbose_name = _('color')
+        verbose_name_plural = _('colors')
+
+
+class SizeModel(models.Model):
+    name = models.CharField(max_length=5, verbose_name=_('name'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('size')
+        verbose_name_plural = _('sizes')
+
+
 class BrandModel(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('name'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
@@ -60,6 +84,18 @@ class ProductModel(models.Model):
         null=True,
         blank=True
     )
+    color = models.ManyToManyField(
+        ColorModel,
+        related_name='products',
+        verbose_name=_('color'),
+        null=True,
+    )
+    size = models.ManyToManyField(
+        SizeModel,
+        related_name='products',
+        verbose_name=_('size'),
+        null=True,
+    )
     tag = models.ManyToManyField(
         TagModel,
         related_name='products',
@@ -87,3 +123,5 @@ class ProductModel(models.Model):
     class Meta:
         verbose_name = _('product')
         verbose_name_plural = _('products')
+
+
