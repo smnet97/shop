@@ -34,7 +34,7 @@ class ColorModelAdmin(admin.ModelAdmin):
     form = ColorModelForm
 
     def color(self, obj):
-        return mark_safe("<div>hello</div>")
+        return mark_safe(f'<div style="background-color:{obj.code}; width: 80px; height:20px;"></div>')
 
 
 @admin.register(SizeModel)

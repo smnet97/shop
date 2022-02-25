@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+    <style>
+        a:hover{
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -41,9 +49,9 @@
                                 <div class="shop__product__option__right">
                                     <p>Sort by Price:</p>
                                     <select>
+                                        <option value="">---</option>
                                         <option value="">Low To High</option>
-                                        <option value="">$0 - $55</option>
-                                        <option value="">$55 - $100</option>
+                                        <option value="">High TO Low</option>
                                     </select>
                                 </div>
                             </div>
@@ -132,4 +140,17 @@
     </section>
     <!-- Shop Section End -->
 
+{% endblock %}
+{% block extra_js %}
+    <script> <!-- brand=1 -->
+        function getParamSearch(name, value){
+        var searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.has(name) && searchParams.get(name) == value){
+            searchParams.delete(name);
+        }else {
+            searchParams.set(name, value);
+        }
+        window.location.search = searchParams.toString();
+    }
+</script>
 {% endblock %}
