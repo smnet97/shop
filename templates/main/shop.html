@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load my_tags %}
 
 {% block extra_css %}
     <style>
@@ -7,6 +8,7 @@
             cursor: pointer;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
 {% endblock %}
 
 {% block content %}
@@ -48,10 +50,10 @@
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__right">
                                     <p>Sort by Price:</p>
-                                    <select>
+                                    <select onchange="getParamSearch('price_sort', this.value)">
                                         <option value="">---</option>
-                                        <option value="">Low To High</option>
-                                        <option value="">High TO Low</option>
+                                        <option {% if request.GET.price_sort == 'price' %} selected {% endif %} value="price">Low To High</option>
+                                        <option {% if request.GET.price_sort == '-price' %} selected {% endif %} value="-price">High TO Low</option>
                                     </select>
                                 </div>
                             </div>
@@ -92,7 +94,7 @@
                                         </div>
                                         <h5>
                                             ${% if object.is_discount %}
-                                            {{ object.get_price }}
+                                            {{ object.real_price }}
                                         {% else %}
                                             {{ object.price }}
                                         {% endif %}
@@ -153,4 +155,20 @@
         window.location.search = searchParams.toString();
     }
 </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+    <script>
+        $(".js-range-slider").ionRangeSlider({
+        type: "double",
+        grid: true,
+        min: {{ min_price }},
+        max: {{ max_price }},
+        from: {% get_current_price request 0 %},
+        to: {%  get_current_price request 1 %},
+        prefix: "$",
+            onFinish(data){
+                let result = data.from.toString() + ';' + data.to.toString()
+                getParamSearch('price', result)
+            }
+    });
+    </script>
 {% endblock %}

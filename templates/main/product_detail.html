@@ -87,7 +87,7 @@
                             </div>
                             <h3>
                                 ${% if object.is_discount %}
-                                    {{ object.get_price }}
+                                    {{ object.real_price }}
                                     <del>{{ object.price }}</del>
                                 {% else %}
                                     {{ object.price }}
@@ -286,7 +286,7 @@
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                             </div>
-                            <h5>${{ p.get_price }}</h5>
+                            <h5>${{ p.real_price }}</h5>
                             <div class="product__color__select">
                                 <label for="pc-1">
                                     <input type="radio" id="pc-1">

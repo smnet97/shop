@@ -51,3 +51,4 @@ class ProductModelAdmin(admin.ModelAdmin):
     search_fields = ['name']
     list_filter = ['created_at']
     autocomplete_fields = ['tag', 'category']
+    readonly_fields = ['real_price']

@@ -67,6 +67,7 @@ class ProductModel(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('name'))
     image = models.ImageField(upload_to='products', verbose_name=_('image'))
     price = models.FloatField(verbose_name=_('price'))
+    real_price = models.FloatField(verbose_name=_('real price'), default=0)
     discount = models.PositiveIntegerField(default=0, verbose_name=_('discount'))
     short_description = models.TextField(verbose_name=_('short description'))
     long_description = models.TextField(verbose_name=_('long description'))
@@ -89,12 +90,14 @@ class ProductModel(models.Model):
         related_name='products',
         verbose_name=_('color'),
         null=True,
+        blank=True
     )
     size = models.ManyToManyField(
         SizeModel,
         related_name='products',
         verbose_name=_('size'),
         null=True,
+        blank=True
     )
     tag = models.ManyToManyField(
         TagModel,
@@ -102,11 +105,6 @@ class ProductModel(models.Model):
         verbose_name=_('tag')
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
-
-    def get_price(self):
-        if self.discount == 0:
-            return self.price
-        return (100 - self.discount) / 100 * self.price
 
     def is_new(self):
         return (timezone.now() - self.created_at).days <= 3
