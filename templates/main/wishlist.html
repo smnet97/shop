@@ -59,9 +59,11 @@
                                         {% endif %}
                                         <ul class="product__hover">
                                             <li>
-                                                <a href="{% url 'products:add_wishlist' object.pk %}?next={{ request.path }}">
-                                                    <img src="{% static 'img/icon/heart.png' %}" alt="">
-                                                </a>
+                                                {% if request.user.is_authenticated and object|is_wishlist:request.user %}
+                                                        <a href="{% url 'products:add_wishlist' object.pk %}?next={{ request.path }}">
+                                                            <img src="{% static 'img/icon/heart-black.png' %}" alt="">
+                                                        </a>
+                                                {% endif %}
                                             </li>
                                             <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
                                                 <span>Compare</span></a>

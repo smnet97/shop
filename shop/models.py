@@ -115,6 +115,10 @@ class ProductModel(models.Model):
     def get_related(self):
         return ProductModel.objects.filter(category__name=self.category).exclude(pk=self.pk)[:4]
 
+    @staticmethod
+    def get_cart_info(cart):
+        return ProductModel.objects.filter(id__in=cart)
+
     def __str__(self):
         return self.name
 

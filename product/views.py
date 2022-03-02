@@ -20,4 +20,23 @@ def update_wishlist(request, pk):
 
     return redirect(request.GET.get('next', '/'))
 
-# product/2/wishlist/?next=/product/wishlist/
+
+def update_cart(request, pk):
+    product = get_object_or_404(ProductModel.objects.all().filter(id=pk))
+    cart = request.session.get('cart', [])
+    if pk in cart:
+        cart.remove(pk)
+    else:
+        cart.append(pk)
+
+    request.session['cart'] = cart
+
+    return redirect(request.GET.get('next', '/'))
+
+
+class CartListView(ListView):
+    template_name = 'main/shopping_cart.html'
+
+    def get_queryset(self):
+        cart = self.request.session.get('cart', [])
+        return ProductModel.get_cart_info(cart)
