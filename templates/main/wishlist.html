@@ -2,15 +2,6 @@
 {% load static %}
 {% load my_tags %}
 
-{% block extra_css %}
-    <style>
-        a:hover{
-            cursor: pointer;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
-{% endblock %}
-
 {% block content %}
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -18,10 +9,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Shop</h4>
+                        <h4>Wish List</h4>
                         <div class="breadcrumb__links">
                             <a href="./index.html">Home</a>
-                            <span>Shop</span>
+                            <span>Wish List</span>
                         </div>
                     </div>
                 </div>
@@ -34,12 +25,7 @@
     <section class="shop spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="shop__sidebar">
-                        {% include 'layouts/shop_sidebar.html' %}
-                    </div>
-                </div>
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                     <div class="shop__product__option">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -61,7 +47,7 @@
                     </div>
                     <div class="row">
                         {% for object in object_list %}
-                            <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="product__item {% if object.is_discount %}sale{% endif %}">
                                     <div class="product__item__pic set-bg" data-setbg="{{ object.image.url }}">
                                         {% if object.is_discount %}
@@ -73,16 +59,8 @@
                                         {% endif %}
                                         <ul class="product__hover">
                                             <li>
-                                                    {% if request.user.is_authenticated and object|is_wishlist:request.user %}
-                                                        <a href="{% url 'products:add_wishlist' object.pk %}?next={{ request.path }}">
-                                                            <img src="{% static 'img/icon/heart-black.png' %}" alt="">
-                                                        </a>
-                                                    {% elif request.user.is_authenticated %}
-                                                        <a href="{% url 'products:add_wishlist' object.pk %}?next={{ request.path }}">
-                                                            <img src="{% static 'img/icon/heart.png' %}" alt="">
-                                                        </a>
-                                                    {% endif %}
-
+                                                <a href="{% url 'products:add_wishlist' object.pk %}?next={{ request.path }}">
+                                                    <img src="{% static 'img/icon/heart.png' %}" alt="">
                                                 </a>
                                             </li>
                                             <li><a href="#"><img src="{% static 'img/icon/compare.png' %}" alt="">
@@ -166,20 +144,4 @@
         window.location.search = searchParams.toString();
     }
 </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
-    <script>
-        $(".js-range-slider").ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: {{ min_price }},
-        max: {{ max_price }},
-        from: {% get_current_price request 0 %},
-        to: {%  get_current_price request 1 %},
-        prefix: "$",
-            onFinish(data){
-                let result = data.from.toString() + ';' + data.to.toString()
-                getParamSearch('price', result)
-            }
-    });
-    </script>
 {% endblock %}
