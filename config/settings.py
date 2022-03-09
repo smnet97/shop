@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'shop',
     'blog',
     'pages',
-    'product'
+    'product',
+    'client',
 ]
 
 MIDDLEWARE = [
@@ -101,9 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = (
-    ('en', '🇬🇧 English'),
-    ('uz', '🇺🇿 Uzbek'),
-    ('ru', '🇷🇺 Russian')
+    ('en', '🇬🇧'),
+    ('uz', '🇺🇿'),
+    ('ru', '🇷🇺')
 )
 
 LOCALE_PATHS = BASE_DIR / 'locale',

@@ -15,18 +15,29 @@
                     <div class="header__top__right">
                         <div class="header__top__links">
                             {% if request.user.is_authenticated %}
+                                <a href="#">{% trans 'History' %}</a>
+                                <a href="{% url 'profile:home' %}">{% trans 'Profile' %}</a>
                                 <a href="{% url 'auth_logout' %}">{% trans 'Log out' %}</a>
                             {% else %}
                                 <a href="{% url 'auth_login' %}">{% trans 'Sign in' %}</a>
                             {% endif %}
 
+
                         </div>
                         <div class="header__top__hover">
-                            <span>Usd <i class="arrow_carrot-down"></i></span>
+                            {% get_current_language as current_lan %}
+
+                            <span>{{ current_lan }} <i class="arrow_carrot-down"></i></span>
                             <ul>
-                                <li>USD</li>
-                                <li>EUR</li>
-                                <li>USD</li>
+                                {% get_available_languages as languages %}
+                                {% for lan in languages %}
+                                    {% if lan.0 != current_lan %}
+                                        <li>
+                                            <a href="/{{ lan.0 }}/{{ request.path|slice:'4:' }}"
+                                               style="text-decoration: none; color: black;">{{ lan.0|upper }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -38,25 +49,30 @@
         <div class="row">
             <div class="col-lg-3 col-md-3">
                 <div class="header__logo">
-                    <a href="./index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                    <a href="{% url 'pages:home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <nav class="header__menu mobile-menu">
                     <ul>
-                        <li {% if request.path == '/' %}class="active"{% endif %}>
+                        {% url 'pages:home' as current_path %}
+                        <li {% if request.path == current_path %}class="active"{% endif %}>
                             <a href="{% url 'pages:home' %}">{% trans 'Home' %}</a>
                         </li>
-                        <li {% if request.path == '/shop/' %}class="active"{% endif %}>
+                        {% url 'shops:shop' as current_path %}
+                        <li {% if request.path == current_path %}class="active"{% endif %}>
                             <a href="{% url 'shops:shop' %}">{% trans 'Shop' %}</a>
                         </li>
-                        <li {% if request.path == '/blog/' %}class="active"{% endif %}>
+                        {% url 'blogs:blog_list' as current_path %}
+                        <li {% if request.path == current_path %}class="active"{% endif %}>
                             <a href="{% url 'blogs:blog_list' %}">{% trans 'Blog' %}</a>
                         </li>
-                        <li {% if request.path == '/about/' %}class="active"{% endif %}>
+                        {% url 'pages:about' as current_path %}
+                        <li {% if request.path == current_path %}class="active"{% endif %}>
                             <a href="{% url 'pages:about' %}">{% trans 'About Us' %}</a>
                         </li>
-                        <li {% if request.path == '/contact/' %}class="active"{% endif %}>
+                        {% url 'pages:contact' as current_path %}
+                        <li {% if request.path == current_path %}class="active"{% endif %}>
                             <a href="{% url 'pages:contact' %}">{% trans 'Contacts' %}</a>
                         </li>
                     </ul>
@@ -71,7 +87,8 @@
                         </a>
                     {% endif %}
                     {% get_cart_info request as cart_info %}
-                    <a href="{% url 'products:shopping_cart' %}"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>{{ cart_info.0 }}</span></a>
+                    <a href="{% url 'products:shopping_cart' %}"><img src="{% static 'img/icon/cart.png' %}" alt="">
+                        <span>{{ cart_info.0 }}</span></a>
                     <div class="price">${{ cart_info.1 }}</div>
 
                 </div>
