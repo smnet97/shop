@@ -2,7 +2,10 @@ asgiref==3.5.0
 backports.zoneinfo==0.2.1
 Django==4.0.2
 django-environ==0.8.1
+django-modeltranslation==0.17.5
+django-registration-redux==2.9
 mysqlclient==2.1.0
 Pillow==9.0.1
 python-decouple==3.5
+six==1.16.0
 sqlparse==0.4.2

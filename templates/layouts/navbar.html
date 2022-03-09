@@ -1,5 +1,6 @@
 {% load static %}
 {% load my_tags %}
+{% load i18n %}
 <!-- Header Section Begin -->
 <header class="header">
     <div class="header__top">
@@ -7,13 +8,18 @@
             <div class="row">
                 <div class="col-lg-6 col-md-7">
                     <div class="header__top__left">
-                        <p>Free shipping, 30-day return or refund guarantee.</p>
+                        <p>{% trans 'Free shipping, 30-day return or refund guarantee.' %}</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-5">
                     <div class="header__top__right">
                         <div class="header__top__links">
-                            <a href="#">Sign in</a>
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'auth_logout' %}">{% trans 'Log out' %}</a>
+                            {% else %}
+                                <a href="{% url 'auth_login' %}">{% trans 'Sign in' %}</a>
+                            {% endif %}
+
                         </div>
                         <div class="header__top__hover">
                             <span>Usd <i class="arrow_carrot-down"></i></span>
@@ -39,19 +45,19 @@
                 <nav class="header__menu mobile-menu">
                     <ul>
                         <li {% if request.path == '/' %}class="active"{% endif %}>
-                            <a href="{% url 'pages:home' %}">Home</a>
+                            <a href="{% url 'pages:home' %}">{% trans 'Home' %}</a>
                         </li>
                         <li {% if request.path == '/shop/' %}class="active"{% endif %}>
-                            <a href="{% url 'shops:shop' %}">Shop</a>
+                            <a href="{% url 'shops:shop' %}">{% trans 'Shop' %}</a>
                         </li>
                         <li {% if request.path == '/blog/' %}class="active"{% endif %}>
-                            <a href="{% url 'blogs:blog_list' %}">Blog</a>
+                            <a href="{% url 'blogs:blog_list' %}">{% trans 'Blog' %}</a>
                         </li>
                         <li {% if request.path == '/about/' %}class="active"{% endif %}>
-                            <a href="{% url 'pages:about' %}">About Us</a>
+                            <a href="{% url 'pages:about' %}">{% trans 'About Us' %}</a>
                         </li>
                         <li {% if request.path == '/contact/' %}class="active"{% endif %}>
-                            <a href="{% url 'pages:contact' %}">Contacts</a>
+                            <a href="{% url 'pages:contact' %}">{% trans 'Contacts' %}</a>
                         </li>
                     </ul>
                 </nav>

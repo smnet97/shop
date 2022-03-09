@@ -29,4 +29,4 @@ def is_wishlist(product, user):
 
 @register.filter
 def is_cart(request, product):
-    return product.pk in request.session.get('cart')
+    return product.pk in request.session.get('cart', [])
