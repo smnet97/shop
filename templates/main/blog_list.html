@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-    <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-blog set-bg" data-setbg="{% static 'img/breadcrumb-bg.jpg' %}">
         <div class="container">
             <div class="row">
@@ -19,9 +18,7 @@
             </div>
         </div>
     </section>
-    <!-- Breadcrumb Section End -->
 
-    <!-- Blog Section Begin -->
     <section class="blog spad">
         <div class="container">
             <div class="row">
@@ -42,7 +39,6 @@
             </div>
         </div>
     </section>
-    <!-- Blog Section End -->
     {% if page_obj.paginator.count > 6 %}
     <section class="container mb-4 pb-5">
         <div class="row">
