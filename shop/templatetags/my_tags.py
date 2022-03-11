@@ -9,7 +9,7 @@ register = template.Library()
 @register.simple_tag
 def get_cart_info(request):
     cart = request.session.get('cart', [])
-    print(cart)
+
     if not cart:
         return 0, 0.0
 
