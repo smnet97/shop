@@ -17,9 +17,9 @@ class ProfileModel(models.Model):
     zip_code = models.CharField(max_length=30, verbose_name=_('zip code'), null=True, blank=True)
     phone = models.CharField(max_length=13, verbose_name=_('phone'), null=True, blank=True)
     email = models.EmailField(verbose_name=_('email'), null=True, blank=True)
-    #
-    # def __str__(self):
-    #     return self.first_name
+
+    def __str__(self):
+        return f'{self.first_name}  {self.last_name}'
 
     class Meta:
         verbose_name = _('profile')

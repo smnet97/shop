@@ -54,7 +54,11 @@
                                     </div>
                                 </td>
                                 <td class="cart__price">$ {{ product.real_price }}</td>
-                                <td class="cart__close"><i class="fa fa-close"></i></td>
+                                <td class="cart__close">
+                                    <a href="{% url 'products:add_cart' product.id %}?next={{ request.path }}">
+                                        <i class="fa fa-close"></i>
+                                    </a>
+                                </td>
                             </tr>
                             {% endfor %}
                             </tbody>
@@ -85,10 +89,9 @@
                         <h6>Cart total</h6>
                         <ul>
                             {% get_cart_info request as cart_info %}
-                            <li>Subtotal <span>$ {{ cart_info.1 }}</span></li>
                             <li>Total <span>$ {{ cart_info.1 }}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <a href="{% url 'orders:checkout' %}" class="primary-btn">Proceed to checkout</a>
                     </div>
                 </div>
             </div>

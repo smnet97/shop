@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'pages',
     'product',
     'client',
+    'orders',
 ]
 
 MIDDLEWARE = [
