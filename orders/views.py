@@ -15,7 +15,6 @@ class CheckoutView(CreateView):
         context['products'] = ProductModel.get_cart_info(cart)
 
         if hasattr(self.request.user.profiles, 'profiles'):
-            print(self.request.user.profiles)
             context['profile'] = self.request.user.profiles
 
         return context
