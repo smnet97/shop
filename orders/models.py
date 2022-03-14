@@ -30,3 +30,5 @@ class OrderModel(models.Model):
     class Meta:
         verbose_name = 'order'
         verbose_name_plural = 'orders'
+
+

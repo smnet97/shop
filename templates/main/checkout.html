@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load my_tags %}
 {% block content %}
     <section class="breadcrumb-option">
         <div class="container">
@@ -23,6 +23,9 @@
             <div class="checkout__form">
                 <form action="#" method="post">
                     {% csrf_token %}
+                <p>
+                    {{ form.errors }}
+                </p>
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
@@ -31,81 +34,56 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        {{ form.first_name|default:'' }}
+                                        <p>First Name<span>*</span></p>
+                                        <input type="text" value="{{ profile.first_name|default:'' }}"
+                                               name="first_name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Last Name<span>*</span></p>
-                                        {% for p in profile %}
-                                            <p>
-                                                {{ p }}
-                                            </p>
-                                        {% endfor %}
+                                        <input type="text" value="{{ profile.last_name|default:'' }}" name="last_name">
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Country<span>*</span></p>
-                                <input type="text">
+                                <input type="text" value="{{ profile.country|default:'' }}" name="country">
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                                <input type="text" value="{{ profile.address1|default:'' }}" name="address1"
+                                       placeholder="Street Address" class="checkout__input__add">
+                                <input type="text" value="{{ profile.address2|default:'' }}" name="address2"
+                                       placeholder="Apartment, suite, unite ect (optinal)">
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
-                                <input type="text">
+                                <input type="text" value="{{ profile.city|default:'' }}" name="city">
                             </div>
                             <div class="checkout__input">
                                 <p>Country/State<span>*</span></p>
-                                <input type="text">
+                                <input type="text" value="{{ profile.state|default:'' }}" name="state">
                             </div>
                             <div class="checkout__input">
                                 <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
+                                <input type="text" value="{{ profile.zip_code|default:'' }}" name="zip_code">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" value="{{ profile.phone|default:'' }}" name="phone">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" value="{{ profile.email|default:'' }}" name="email">
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    Create an account?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <p>Create an account by entering the information below. If you are a returning customer
-                                    please login at the top of the page</p>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Note about your order, e.g, special noe for delivery
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                       placeholder="Notes about your order, e.g. special notes for delivery.">
-                            </div>
+
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
@@ -118,8 +96,8 @@
                                     {% endfor %}
                                 </ul>
                                 <ul class="checkout__total__all">
-                                    <li>Subtotal <span>$750.99</span></li>
-                                    <li>Total <span>$750.99</span></li>
+                                    {% get_cart_info request as cart_info %}
+                                    <li>Total <span>$ {{ cart_info.1 }}</span></li>
                                 </ul>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
