@@ -44,6 +44,10 @@ class SizeModelAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+class ProductImageStackedInline(admin.StackedInline):
+    model = ProductImageModel
+
+
 @admin.register(ProductModel)
 class ProductModelAdmin(TranslationAdmin):
     list_display = ['id', 'name', 'price']
@@ -52,6 +56,7 @@ class ProductModelAdmin(TranslationAdmin):
     list_filter = ['created_at']
     autocomplete_fields = ['tag', 'category']
     readonly_fields = ['real_price']
+    inlines = [ProductImageStackedInline]
 
     class Media:
         js = (

@@ -7,7 +7,7 @@ from shop.models import ProductModel
 from .forms import OrderModelForm
 
 
-class CheckoutView(CreateView):
+class CheckoutView(LoginRequiredMixin, CreateView):
     template_name = 'main/checkout.html'
     form_class = OrderModelForm
 
